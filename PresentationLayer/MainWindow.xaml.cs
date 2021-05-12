@@ -24,6 +24,7 @@ namespace PresentationLayer
 	{
 		private SudokuManager sudokuManager;
 		private TextBox[,] txtGrid = new TextBox[9, 9];
+		private int[,] intBoard = new int[9, 9];
 
 		public MainWindow()
 		{
@@ -102,10 +103,10 @@ namespace PresentationLayer
 				}
 			}
 
-			Print2DArray<int>(sudokuManager.SudokuBoard);
-			sudokuManager.SolveBoard();
-			Console.WriteLine("\nSolved Board\n");
-			Print2DArray<int>(sudokuManager.SudokuBoard);
+			//Print2DArray<int>(sudokuManager.SudokuBoard);
+			//sudokuManager.SolveBoard();
+			//Console.WriteLine("\nSolved Board\n");
+			//Print2DArray<int>(sudokuManager.SudokuBoard);
 		}
 
 		private void ChangeText(int i, int j)
@@ -119,6 +120,7 @@ namespace PresentationLayer
 			}
 		}
 
+		//Debug Tool
 		public static void Print2DArray<T>(T[,] matrix)
 		{
 			for (int i = 0; i < matrix.GetLength(0); i++)
@@ -133,14 +135,57 @@ namespace PresentationLayer
 
 		private void btnReset_Click(object sender, RoutedEventArgs e)
 		{
-			//TODO Finsh Method
-			Console.WriteLine("Click");
+			for (int i = 0; i < 9; i++)
+			{
+				for (int j = 0; j < 9; j++)
+				{
+					txtGrid[i, j].Text = "";
+				}
+			}
+			UpdateBoard();
 		}
 
 		private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			//TODO Finsh Method
-			Console.WriteLine("Changed");
+			UpdateBoard();
+		}
+
+		private void UpdateBoard()
+		{
+			try
+			{
+				for (int i = 0; i < 9; i++)
+				{
+					for (int j = 0; j < 9; j++)
+					{
+						if(txtGrid[i, j].Text == null || txtGrid[i, j].Text.Equals(""))
+						{
+							intBoard[i, j] = 0;
+						} else
+						{
+							intBoard[i, j] = Int32.Parse(txtGrid[i, j].Text);
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+		}
+
+		private void btnSubmit_Click(object sender, RoutedEventArgs e)
+		{
+			sudokuManager.UpdatedBoard(intBoard);
+			sudokuManager.SolveBoard();
+			for (int i = 0; i < 9; i++)
+			{
+				for (int j = 0; j < 9; j++)
+				{
+					ChangeText(i, j);
+				}
+			}
 		}
 	}
 }

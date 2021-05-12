@@ -22,6 +22,7 @@
 		</Grid.ColumnDefinitions>
 		<UniformGrid x:Name="ugaBoard" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Rows="9" Columns="9" Visibility="Visible" Background="AliceBlue">
 		</UniformGrid>
-		<Button x:Name="btnReset" Grid.Row="4" Grid.Column="2" Content="Stop" Click="btnReset_Click"/>
+		<Button x:Name="btnSubmit" Grid.Row="4" Grid.Column="1" Content="Submit" Click="btnSubmit_Click" />
+		<Button x:Name="btnReset" Grid.Row="4" Grid.Column="2" Content="Reset Board" Click="btnReset_Click"/>
 	</Grid>
 </Window>

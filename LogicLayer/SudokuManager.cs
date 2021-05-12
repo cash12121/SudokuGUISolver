@@ -192,5 +192,6 @@ namespace LogicLayer
 			// Array and the last number is correct. Therefore return true.
 			return true;
 		}
+
 	}
 }
